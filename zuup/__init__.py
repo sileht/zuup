@@ -332,7 +332,7 @@ class Zuup(object):
             return ''
 
     def get_zuul_reviews(self, gerrit_reviews):
-        r = requests.get('http://zuul.openstack.org/status.json')
+        r = requests.get('http://zuul.openstack.org/api/status')
         if r.status_code != 200:
             raise UnexceptedException("Zuul request failed: \n%s" % r.text)
 
