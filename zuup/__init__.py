@@ -328,8 +328,12 @@ class Zuup(object):
         else:
             url = job.get('url')
             if url:
-                return url.replace('telnet://', '| socat - tcp:')
-            return ''
+                if url.startswith("stream.html"):
+                    return "http://zuul.openstack.org/%s" % url
+                else:
+                    return url.replace('telnet://', '| socat - tcp:')
+            else:
+                return ''
 
     def get_zuul_reviews(self, gerrit_reviews):
         r = requests.get('http://zuul.openstack.org/api/status')
